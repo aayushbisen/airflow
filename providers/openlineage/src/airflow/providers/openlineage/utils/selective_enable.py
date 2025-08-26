@@ -18,7 +18,7 @@
 from __future__ import annotations
 
 import logging
-from typing import TYPE_CHECKING, TypeVar
+from typing import TYPE_CHECKING, TypeVar, overload
 
 from airflow.models import Param
 from airflow.models.xcom_arg import XComArg
@@ -42,14 +42,22 @@ DISABLE_OL_PARAM = Param(False, const=False)
 log = logging.getLogger(__name__)
 
 
-def enable_lineage(obj: T) -> T:
+@overload
+def enable_lineage(obj: T) -> T: ...
+
+
+@overload 
+def enable_lineage(obj: XComArg) -> XComArg: ...
+
+
+def enable_lineage(obj: T | XComArg) -> T | XComArg:
     """
     Set selective enable OpenLineage parameter to True.
 
     The method also propagates param to tasks if the object is DAG.
     """
     if isinstance(obj, XComArg):
-        enable_lineage(obj.operator)
+        enable_lineage(obj.operator)  # type: ignore[attr-defined]
         return obj
     # propagate param to tasks
     if isinstance(obj, DAG):
@@ -59,14 +67,22 @@ def enable_lineage(obj: T) -> T:
     return obj
 
 
-def disable_lineage(obj: T) -> T:
+@overload
+def disable_lineage(obj: T) -> T: ...
+
+
+@overload
+def disable_lineage(obj: XComArg) -> XComArg: ...
+
+
+def disable_lineage(obj: T | XComArg) -> T | XComArg:
     """
     Set selective enable OpenLineage parameter to False.
 
     The method also propagates param to tasks if the object is DAG.
     """
     if isinstance(obj, XComArg):
-        disable_lineage(obj.operator)
+        disable_lineage(obj.operator)  # type: ignore[attr-defined]
         return obj
     # propagate param to tasks
     if isinstance(obj, DAG):
