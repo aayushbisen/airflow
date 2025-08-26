@@ -272,7 +272,6 @@ class CreateHyperparameterTuningJobOperator(GoogleCloudBaseOperator):
                 ),
                 method_name="execute_complete",
             )
-            return
 
         hyperparameter_tuning_job.wait_for_completion()
         return hyperparameter_tuning_job.to_dict()

@@ -87,9 +87,9 @@ class CloudSecretManagerBackend(BaseSecretsBackend, LoggingMixin):
 
     def __init__(
         self,
-        connections_prefix: str = "airflow-connections",
-        variables_prefix: str = "airflow-variables",
-        config_prefix: str = "airflow-config",
+        connections_prefix: str | None = "airflow-connections",
+        variables_prefix: str | None = "airflow-variables",
+        config_prefix: str | None = "airflow-config",
         gcp_keyfile_dict: dict | None = None,
         gcp_key_path: str | None = None,
         gcp_credential_config_file: dict[str, str] | str | None = None,

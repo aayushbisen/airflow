@@ -66,8 +66,6 @@ default_args: dict[str, Any] = {"retries": 3}
 # [START howto_operator_gcf_deploy_variants]
 if SOURCE_ARCHIVE_URL:
     body["sourceArchiveUrl"] = SOURCE_ARCHIVE_URL
-elif SOURCE_REPOSITORY:
-    body["sourceRepository"] = {"url": SOURCE_REPOSITORY}
 elif ZIP_PATH:
     body["sourceUploadUrl"] = ""
     default_args["zip_path"] = ZIP_PATH

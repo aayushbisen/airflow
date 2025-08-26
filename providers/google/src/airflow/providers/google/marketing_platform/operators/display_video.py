@@ -81,7 +81,7 @@ class GoogleDisplayVideo360CreateQueryOperator(BaseOperator):
     def __init__(
         self,
         *,
-        body: dict[str, Any],
+        body: dict[str, Any] | str,
         api_version: str = "v2",
         gcp_conn_id: str = "google_cloud_default",
         impersonation_chain: str | Sequence[str] | None = None,

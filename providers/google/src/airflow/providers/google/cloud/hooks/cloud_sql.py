@@ -597,7 +597,7 @@ class CloudSqlProxyRunner(LoggingMixin):
         if key_path:
             credential_params = ["-credential_file", key_path]
         elif keyfile_dict:
-            keyfile_content = keyfile_dict if isinstance(keyfile_dict, dict) else json.loads(keyfile_dict)
+            keyfile_content = json.loads(keyfile_dict)
             self.log.info("Saving credentials to %s", self.credentials_path)
             with open(self.credentials_path, "w") as file:
                 json.dump(keyfile_content, file)
