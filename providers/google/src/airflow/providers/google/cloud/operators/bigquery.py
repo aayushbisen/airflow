@@ -226,7 +226,7 @@ class BigQueryCheckOperator(
         *,
         sql: str,
         gcp_conn_id: str = "google_cloud_default",
-        project_id: str = PROVIDE_PROJECT_ID,
+        project_id: str | None = PROVIDE_PROJECT_ID,
         use_legacy_sql: bool = True,
         location: str | None = None,
         impersonation_chain: str | Sequence[str] | None = None,
@@ -384,7 +384,7 @@ class BigQueryValueCheckOperator(
         tolerance: Any = None,
         encryption_configuration: dict | None = None,
         gcp_conn_id: str = "google_cloud_default",
-        project_id: str = PROVIDE_PROJECT_ID,
+        project_id: str | None = PROVIDE_PROJECT_ID,
         use_legacy_sql: bool = True,
         location: str | None = None,
         impersonation_chain: str | Sequence[str] | None = None,
@@ -554,7 +554,7 @@ class BigQueryIntervalCheckOperator(
         labels: dict | None = None,
         deferrable: bool = conf.getboolean("operators", "default_deferrable", fallback=False),
         poll_interval: float = 4.0,
-        project_id: str = PROVIDE_PROJECT_ID,
+        project_id: str | None = PROVIDE_PROJECT_ID,
         **kwargs,
     ) -> None:
         super().__init__(
@@ -2276,8 +2276,8 @@ class BigQueryInsertJobOperator(GoogleCloudBaseOperator, _BigQueryInsertJobOpera
 
     def __init__(
         self,
-        configuration: dict[str, Any],
-        project_id: str = PROVIDE_PROJECT_ID,
+        configuration: dict[str, Any] | str,
+        project_id: str | None = PROVIDE_PROJECT_ID,
         location: str | None = None,
         job_id: str | None = None,
         force_rerun: bool = True,
