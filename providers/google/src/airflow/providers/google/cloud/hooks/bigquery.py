@@ -217,7 +217,7 @@ class BigQueryHook(GoogleBaseHook, DbApiHook):
             return create_engine(self.get_uri(), credentials_path=credentials_path, **engine_kwargs)
         keyfile_dict = get_field(self.extras, "keyfile_dict")
         if keyfile_dict:
-            keyfile_content = keyfile_dict if isinstance(keyfile_dict, dict) else json.loads(keyfile_dict)
+            keyfile_content = json.loads(keyfile_dict)
             return create_engine(self.get_uri(), credentials_info=keyfile_content, **engine_kwargs)
         try:
             # 1. If the environment variable GOOGLE_APPLICATION_CREDENTIALS is set

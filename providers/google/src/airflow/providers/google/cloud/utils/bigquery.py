@@ -19,7 +19,7 @@ from __future__ import annotations
 from typing import Any
 
 
-def bq_cast(string_field: str, bq_type: str) -> None | int | float | bool | str:
+def bq_cast(string_field: str | None, bq_type: str) -> None | int | float | bool | str:
     """
     Cast a BigQuery row to the appropriate data types.
 

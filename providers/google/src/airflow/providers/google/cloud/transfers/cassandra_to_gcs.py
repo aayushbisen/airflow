@@ -259,7 +259,9 @@ class CassandraToGCSOperator(BaseOperator):
 
     def convert_value(self, value: Any | None) -> Any | None:
         """Convert value to BQ type."""
-        if not value or isinstance(value, (str, int, float, bool, dict)):
+        if value is None:
+            return None
+        if isinstance(value, (str, int, float, bool, dict)):
             return value
         if isinstance(value, bytes):
             return b64encode(value).decode("ascii")

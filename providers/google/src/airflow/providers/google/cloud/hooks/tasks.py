@@ -128,7 +128,7 @@ class CloudTasksHook(GoogleBaseHook):
     @GoogleBaseHook.fallback_to_default_project_id
     def update_queue(
         self,
-        task_queue: Queue,
+        task_queue: Queue | dict,
         project_id: str = PROVIDE_PROJECT_ID,
         location: str | None = None,
         queue_name: str | None = None,

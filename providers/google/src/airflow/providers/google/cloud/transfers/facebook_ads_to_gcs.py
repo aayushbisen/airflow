@@ -145,12 +145,6 @@ class FacebookAdsReportToGcsOperator(BaseOperator):
                     )
                 else:
                     self.log.warning("account_id: %s returned empty report", account_id)
-        else:
-            message = (
-                "Facebook Ads Hook returned different type than expected. Expected return types should be "
-                f"List or Dict. Actual return type of the Hook: {type(bulk_report)}"
-            )
-            raise AirflowException(message)
         total_row_count = self._decide_and_flush(converted_rows_with_action=converted_rows_with_action)
         self.log.info("Facebook Returned %s data points in total: ", total_row_count)
 

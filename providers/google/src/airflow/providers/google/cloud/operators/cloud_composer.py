@@ -752,7 +752,6 @@ class CloudComposerRunAirflowCLICommandOperator(GoogleCloudBaseOperator):
                 ),
                 method_name=GOOGLE_DEFAULT_DEFERRABLE_METHOD_NAME,
             )
-            return
 
         result = hook.wait_command_execution_result(
             project_id=self.project_id,

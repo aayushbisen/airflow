@@ -280,7 +280,7 @@ class GoogleCampaignManagerInsertReportOperator(BaseOperator):
         self,
         *,
         profile_id: str,
-        report: dict[str, Any],
+        report: dict[str, Any] | str,
         api_version: str = "v4",
         gcp_conn_id: str = "google_cloud_default",
         impersonation_chain: str | Sequence[str] | None = None,
